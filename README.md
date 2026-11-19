@@ -32,4 +32,4 @@ Computer Science Engineer · Software Developer · Master's student at the Unive
 <img src="https://github-readme-activity-graph.vercel.app/graph?username=swamil-5504&bg_color=121413&color=e9ece8&line=c6f432&point=ffffff&area=true&hide_border=true" width="100%" />
 
 ## Contact
-LinkedIn](https://www.linkedin.com/in/swamil-randive-00070a246/) · [Email](swamilrandive47@gmail.com)
+[LinkedIn](https://www.linkedin.com/in/swamil-randive-00070a246/) · [Email](swamilrandive47@gmail.com)
