@@ -18,7 +18,7 @@ Computer Science Engineer · Software Developer · Master's student at the Unive
 
 ## Tech
 <p>
-  <img src="https://skillicons.dev/icons?i=java,py,cpp,js,go,spring,fastapi,react,nextjs,postgres,mysql,docker,git&theme=dark" />
+  <img src="https://skillicons.dev/icons?i=cpp,java,py,js,spring,fastapi,react,postgres,mysql,docker,git&theme=dark" />
 </p>
 
 ## Stats
