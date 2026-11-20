@@ -69,7 +69,6 @@ flowchart LR
 </p>
 <p>
   <img src="https://img.shields.io/badge/ClickHouse-121413?style=flat-square&logo=clickhouse&logoColor=c6f432" />
-  <img src="https://img.shields.io/badge/gRPC-121413?style=flat-square&logo=google&logoColor=c6f432" />
   <img src="https://img.shields.io/badge/FIX%20Protocol-121413?style=flat-square&logoColor=c6f432" />
 </p>
 
@@ -91,15 +90,6 @@ flowchart LR
 </p>
 
 <img src="https://github-readme-activity-graph.vercel.app/graph?username=swamil-5504&bg_color=121413&color=e9ece8&line=c6f432&point=ffffff&area=true&hide_border=true" width="100%" />
-
-### 🐍 Contribution snake
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/swamil-5504/swamil-5504/output/github-snake-dark.svg" />
-    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/swamil-5504/swamil-5504/output/github-snake.svg" />
-    <img alt="contribution snake" src="https://raw.githubusercontent.com/swamil-5504/swamil-5504/output/github-snake-dark.svg" />
-  </picture>
-</p>
 
 ---
 
