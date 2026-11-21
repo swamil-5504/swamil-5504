@@ -39,15 +39,24 @@ Computer Science Engineer · Software Developer · Master's student at the Unive
 flowchart LR
     P1[Producer] -->|JSON over TCP| B
     P2[Producer] -->|JSON over TCP| B
+
     subgraph B[BLACKBOX Broker]
         direction TB
-        T[Topic] --> L0[(Partition 0 log)]
-        T --> L1[(Partition 1 log)]
-        T --> L2[(Partition 2 log)]
+        T[Topic Manager] --> L0[(Partition 0 Log)]
+        T --> L1[(Partition 1 Log)]
+        T --> L2[(Partition 2 Log)]
+
+        GM[Consumer Group Manager]
+        GM --> PA[Partition Assignment / Rebalancing]
     end
-    L0 --> C1[Consumer group A<br/>committed offsets]
-    L1 --> C1
-    L2 --> C2[Consumer group B<br/>committed offsets]
+
+    L0 --> C1[Consumer 1]
+    L1 --> C2[Consumer 2]
+    L2 --> C1
+
+    C1 --> CG[Consumer Group]
+    C2 --> CG
+    CG --> O[Persistent Committed Offsets]
 ```
 
 ---
