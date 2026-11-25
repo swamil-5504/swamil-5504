@@ -1,7 +1,7 @@
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:121413,100:c6f432&height=200&section=header&text=Swamil%20Randive&fontSize=48&fontColor=e9ece8&fontAlignY=38&desc=Backend%20%C2%B7%20Distributed%20Systems%20%C2%B7%20AI&descSize=16&descAlignY=58&descColor=e9ece8" width="100%" />
 
 <p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&size=20&pause=1200&color=C6F432&center=true&vCenter=true&width=620&lines=Backend+Engineering;Distributed+Systems;Software+Architecture;Artificial+Intelligence;Computer+Vision" />
+  <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&size=20&pause=1200&color=C6F432&center=true&vCenter=true&width=620&lines=Backend+Engineering;Distributed+Systems;Storage+Engines+%26+Messaging;Software+Architecture;Artificial+Intelligence;Computer+Vision" />
 </p>
 
 <p align="center">
@@ -15,12 +15,15 @@ Computer Science Engineer · Software Developer · Master's student at the Unive
   <img src="https://img.shields.io/badge/LOCATION-Siegen%2C%20DE-c6f432?style=flat-square&labelColor=121413" />
 </p>
 
+I'm a backend engineer who likes understanding systems from the inside out. I build things from first principles (logs, sockets, protocols, coordination) so I know *why* production systems behave the way they do, not just how to use them.
+
 ---
 
 ## ⚡ Currently
-- 🔨 Building **BLACKBOX**, a message broker from scratch in Java
+
+- 🔨 Building **[BLACKBOX](https://github.com/swamil-5504/BLACKBOX)**, a Kafka-inspired message broker in plain Java. Next up: heartbeats, reconnection, metadata sync, then replication.
 - 🎓 Pursuing my Master's at the **University of Siegen**
-- 📚 Digging deeper into distributed systems, storage engines and computer vision
+- 📚 Going deeper into distributed systems, storage engines and computer vision
 
 ---
 
@@ -32,31 +35,48 @@ Computer Science Engineer · Software Developer · Master's student at the Unive
   </a>
 </p>
 
-**[BLACKBOX](https://github.com/swamil-5504/BLACKBOX)** is a Kafka-inspired message broker built from scratch in Java: persistent partition logs, topics, producers, consumer groups with committed offsets, and a JSON-over-TCP protocol.
+**[BLACKBOX](https://github.com/swamil-5504/BLACKBOX)** is a Kafka-inspired message broker built from scratch in Java, using only Java NIO and TCP sockets (no messaging framework). It started as a single-node log and has grown into a multi-broker system.
+
+**What it does today**
+
+- **Storage:** append-only binary partition logs on `FileChannel`, with offset recovery and topic discovery on restart
+- **Messaging:** topics with configurable partitions, a round-robin producer, and offset-based consumers
+- **Consumer groups:** membership, topic subscriptions, round-robin partition assignment, and **automatic rebalancing** when consumers join or leave
+- **Safety:** assignment-aware fetching, so a consumer can only read partitions it owns, plus validated, persistent per-group committed offsets (at-least-once consumption)
+- **Protocol:** newline-delimited JSON over TCP, with a thread per client
+- **Multi-broker networking:** shared cluster config, separate client and internal ports, a validated handshake (broker ID and cluster name), startup retries, persistent peer connections and PING/PONG
+
+**Honest status:** the networking foundation is in place; metadata sync, replication, leader election and failover are the next milestones.
 
 ```mermaid
 flowchart LR
-    P1[Producer] -->|JSON over TCP| B
-    P2[Producer] -->|JSON over TCP| B
+    P[Producers] -->|JSON over TCP| B1
+    CG[Consumer Groups] -->|JSON over TCP| B1
 
-    subgraph B[BLACKBOX Broker]
-        direction TB
-        T[Topic Manager] --> L0[(Partition 0 Log)]
-        T --> L1[(Partition 1 Log)]
-        T --> L2[(Partition 2 Log)]
-
-        GM[Consumer Group Manager]
-        GM --> PA[Partition Assignment / Rebalancing]
+    subgraph Cluster["Cluster: blackbox-local"]
+        direction LR
+        B1[Broker 1] <-->|"internal port<br/>handshake + PING/PONG"| B2[Broker 2]
+        B2 <--> B3[Broker 3]
+        B1 <--> B3
     end
 
-    L0 --> C1[Consumer 1]
-    L1 --> C2[Consumer 2]
-    L2 --> C1
+    subgraph Broker["Inside a broker"]
+        direction TB
+        TM[Topic Manager] --> L[("Partition logs<br/>append-only")]
+        GM[Group Manager] --> PA[Assignment and rebalancing]
+        OM[Offset Manager] --> O[("Committed offsets<br/>JSON")]
+    end
 
-    C1 --> CG[Consumer Group]
-    C2 --> CG
-    CG --> O[Persistent Committed Offsets]
+    B1 -.-> Broker
 ```
+
+| Milestone | Status |
+|---|---|
+| Persistent partitioned logs, producer, consumer | ✅ Done |
+| Consumer groups, rebalancing, committed offsets | ✅ Done |
+| Multi-broker handshake, retries, persistent links | ✅ Done |
+| Heartbeats, reconnection, metadata exchange | 🔜 Next |
+| Replication, leader election, failover | 🗺️ Planned |
 
 ---
 
@@ -73,12 +93,17 @@ flowchart LR
 ## 🧰 Tech
 
 <p>
-  <img src="https://skillicons.dev/icons?i=cpp,java,py,go,js,spring,fastapi,react,graphql,postgres,mysql,docker,linux,git&theme=dark" />
+  <img src="https://skillicons.dev/icons?i=cpp,java,py,go,js,spring,fastapi,react,graphql,postgres,mysql,docker,linux,git,gradle&theme=dark" />
 </p>
 <p>
   <img src="https://img.shields.io/badge/ClickHouse-121413?style=flat-square&logo=clickhouse&logoColor=c6f432" />
   <img src="https://img.shields.io/badge/FIX%20Protocol-121413?style=flat-square&logoColor=c6f432" />
+  <img src="https://img.shields.io/badge/Java%20NIO-121413?style=flat-square&logo=openjdk&logoColor=c6f432" />
+  <img src="https://img.shields.io/badge/TCP%20Networking-121413?style=flat-square&logoColor=c6f432" />
+  <img src="https://img.shields.io/badge/gRPC-121413?style=flat-square&logoColor=c6f432" />
 </p>
+
+**Where I'm strongest:** backend services (Java/Spring Boot, Go, Python/FastAPI), data-heavy query paths (ClickHouse, GraphQL), low-level systems work (storage, sockets, protocols), and financial-systems integration (FIX).
 
 ---
 
