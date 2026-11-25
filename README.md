@@ -21,7 +21,6 @@ Computer Science Engineer · Software Developer · Master's student at the Unive
 - 🔨 Building **BLACKBOX**, a message broker from scratch in Java
 - 🎓 Pursuing my Master's at the **University of Siegen**
 - 📚 Digging deeper into distributed systems, storage engines and computer vision
-- 📫 Open to backend / distributed systems opportunities
 
 ---
 
